@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: int_population_unpivoted
+    description: >
+      Intermediate model that transforms the wide format of population data (one column per year)
+      into a long format (one row per country per year) for easier analysis.
+      Uses the get_year_columns() macro to dynamically generate the list of year columns for unpivoting.
+    columns:
+      - name: country
+        description: The name of the country
+        tests:
+          - not_null
+
+      - name: country_code
+        description: The two-letter ISO country code
+        tests:
+          - not_null
+
+      - name: as_of_year
+        description: The year for which the population count is recorded
+
+      - name: population
+        description: The population count for the given country and year

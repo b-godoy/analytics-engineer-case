@@ -1,0 +1,14 @@
+dbt_world_population:
+  outputs:
+    dev:
+      dataset: dbt
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: /Users/brunogodoy/.dbt/quantum-theorem-451921-c7-ff52eff21c1e.json
+      location: US
+      method: service-account
+      priority: interactive
+      project: quantum-theorem-451921-c7
+      threads: 4
+      type: bigquery
+  target: dev

@@ -1,0 +1,198 @@
+version: 2
+
+models:
+  - name: stg_population_by_country
+    description: >
+      Staging model for world population data by country from 1960 to 2019.
+      Data sourced from World Bank Global Population dataset.
+    columns:
+      - name: country
+        description: The name of the country
+        tests:
+          - not_null
+
+      - name: country_code
+        description: The two-letter ISO country code
+        tests:
+          - not_null
+          - unique
+
+      - name: year_1960
+        description: Population count for the year 1960
+
+      - name: year_1961
+        description: Population count for the year 1961
+
+      - name: year_1962
+        description: Population count for the year 1962
+
+      - name: year_1963
+        description: Population count for the year 1963
+
+      - name: year_1964
+        description: Population count for the year 1964
+
+      - name: year_1965
+        description: Population count for the year 1965
+
+      - name: year_1966
+        description: Population count for the year 1966
+
+      - name: year_1967
+        description: Population count for the year 1967
+
+      - name: year_1968
+        description: Population count for the year 1968
+
+      - name: year_1969
+        description: Population count for the year 1969
+
+      - name: year_1970
+        description: Population count for the year 1970
+
+      - name: year_1971
+        description: Population count for the year 1971
+
+      - name: year_1972
+        description: Population count for the year 1972
+
+      - name: year_1973
+        description: Population count for the year 1973
+
+      - name: year_1974
+        description: Population count for the year 1974
+
+      - name: year_1975
+        description: Population count for the year 1975
+
+      - name: year_1976
+        description: Population count for the year 1976
+
+      - name: year_1977
+        description: Population count for the year 1977
+
+      - name: year_1978
+        description: Population count for the year 1978
+
+      - name: year_1979
+        description: Population count for the year 1979
+
+      - name: year_1980
+        description: Population count for the year 1980
+
+      - name: year_1981
+        description: Population count for the year 1981
+
+      - name: year_1982
+        description: Population count for the year 1982
+
+      - name: year_1983
+        description: Population count for the year 1983
+
+      - name: year_1984
+        description: Population count for the year 1984
+
+      - name: year_1985
+        description: Population count for the year 1985
+
+      - name: year_1986
+        description: Population count for the year 1986
+
+      - name: year_1987
+        description: Population count for the year 1987
+
+      - name: year_1988
+        description: Population count for the year 1988
+
+      - name: year_1989
+        description: Population count for the year 1989
+
+      - name: year_1990
+        description: Population count for the year 1990
+
+      - name: year_1991
+        description: Population count for the year 1991
+
+      - name: year_1992
+        description: Population count for the year 1992
+
+      - name: year_1993
+        description: Population count for the year 1993
+
+      - name: year_1994
+        description: Population count for the year 1994
+
+      - name: year_1995
+        description: Population count for the year 1995
+
+      - name: year_1996
+        description: Population count for the year 1996
+
+      - name: year_1997
+        description: Population count for the year 1997
+
+      - name: year_1998
+        description: Population count for the year 1998
+
+      - name: year_1999
+        description: Population count for the year 1999
+
+      - name: year_2000
+        description: Population count for the year 2000
+
+      - name: year_2001
+        description: Population count for the year 2001
+
+      - name: year_2002
+        description: Population count for the year 2002
+
+      - name: year_2003
+        description: Population count for the year 2003
+
+      - name: year_2004
+        description: Population count for the year 2004
+
+      - name: year_2005
+        description: Population count for the year 2005
+
+      - name: year_2006
+        description: Population count for the year 2006
+
+      - name: year_2007
+        description: Population count for the year 2007
+
+      - name: year_2008
+        description: Population count for the year 2008
+
+      - name: year_2009
+        description: Population count for the year 2009
+
+      - name: year_2010
+        description: Population count for the year 2010
+
+      - name: year_2011
+        description: Population count for the year 2011
+
+      - name: year_2012
+        description: Population count for the year 2012
+
+      - name: year_2013
+        description: Population count for the year 2013
+
+      - name: year_2014
+        description: Population count for the year 2014
+
+      - name: year_2015
+        description: Population count for the year 2015
+
+      - name: year_2016
+        description: Population count for the year 2016
+
+      - name: year_2017
+        description: Population count for the year 2017
+
+      - name: year_2018
+        description: Population count for the year 2018
+
+      - name: year_2019
+        description: Population count for the year 2019 

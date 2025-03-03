@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bigquery-public-data__world_bank_global_population
+    schema: world_bank_global_population
+    database: bigquery-public-data
+    tables:
+      - name: population_by_country
+        description: "World Bank global population data by country"

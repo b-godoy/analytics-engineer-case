@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: tgt_population_by_year
+    description: "Annual population data by country from 2010 onwards"
+    columns:
+      - name: country
+        description: "Country name"
+      - name: country_code
+        description: "ISO country code"
+      - name: as_of_year
+        description: "Year of population measurement"
+      - name: population
+        description: "Total population count"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - country_code
+            - as_of_year

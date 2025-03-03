@@ -1,0 +1,14 @@
+version: 2
+
+macros:
+  - name: get_year_columns
+    description: >
+      A macro that dynamically queries BigQuery's INFORMATION_SCHEMA to get a comma-separated list
+      of all year columns (columns starting with 'year_') from the population_by_country table
+      in the bigquery-public-data.world_bank_global_population dataset.
+    arguments: []
+    returns: >
+      Returns a string containing a comma-separated list of column names (e.g., "year_1960, year_1961, ...")
+      that can be used in an UNPIVOT operation.
+    docs:
+      show: true 
