@@ -1,9 +1,9 @@
-
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'dbt_world_population'
 version: '1.0.0'
+config-version: 2   # Specifies the config version (2 is latest)
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_world_population'
@@ -17,20 +17,100 @@ test-paths: ["tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+docs-paths: ["docs"]  # Directory for documentation files
+asset-paths: ["assets"] # Static assets for documentation
+
+# Target directory settings
+target-path: "target"  # Directory which will store compiled SQL files
+log-path: "logs"       # Directory which will store DBT logs
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
+  - "logs"
 
+# Quoting settings - how identifiers are rendered in SQL
+quoting:
+  database: false
+  schema: false
+  identifier: false
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
+# Variables - reusable values that can be referenced in project files
+vars:
+  # Core settings
+  'dbt_date:time_zone': 'UTC'
+  # Environment specific settings can be conditionally set using macros
+  # e.g. 'data_threshold': "{{ 10000 if target.name == 'dev' else 100000 }}"
 
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
+# On-run-start & on-run-end hooks - SQL statements executed before/after running dbt
+on-run-start:
+  - "{{ log('Beginning run of dbt_world_population project...', info=true) }}"
+  - "{{ create_audit_schema_if_not_exists() }}"  # Example custom macro call
+  
+on-run-end:
+  - "{{ log('Completed run of dbt_world_population project', info=true) }}"
+  - "{{ update_audit_log('dbt_world_population') }}"  # Example custom macro call
+
+# Package management
+packages:
+  # Uncomment and add packages as needed
+  # - package: dbt-labs/dbt_utils
+  #   version: [">=0.9.0", "<0.10.0"]
+  # - package: dbt-labs/audit_helper
+  #   version: [">=0.6.0", "<0.7.0"]
+
+# Query Tags - metadata added to queries for monitoring
+query-comment:
+  comment: "dbt_world_population: {{ node.database }}.{{ node.schema }}.{{ node.name }}: {{ env_var('DBT_CLOUD_JOB_ID', 'manual') }}"
+  append: true  # Add comments to the end of queries
+
+# Documentation settings
+docs:
+  project_name: "World Population Analytics"
+  homepage: docs/index.md
+
+# Configuring models with environment-specific settings
 models:
   dbt_world_population:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    # Default configurations for all models
+    +materialized: view
+    +persist_docs:
+      relation: true
+      columns: true
+    
+    # Staging models (raw data transformations)
+    staging:
       +materialized: view
+      +schema: staging
+      
+    # Intermediate models (business logic transformations)
+    intermediate:
+      +materialized: ephemeral
+      +schema: intermediate
+    
+    # Fact tables (metrics/KPIs)
+    marts:
+      +materialized: table
+      +schema: marts
+      
+# Tests configuration
+tests:
+  +store_failures: true
+  +severity: error  # Default severity level
+  
+  # Custom test paths
+  +paths:
+    - tests/generic
+    - tests/singular
+
+# Snapshots configuration
+snapshots:
+  +target_schema: snapshots
+  +strategy: timestamp
+  +updated_at: updated_at
+  +unique_key: id
+
+# Seeds configuration
+seeds:
+  +schema: seeds
+  +quote_columns: true
